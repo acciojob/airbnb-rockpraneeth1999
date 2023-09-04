@@ -41,10 +41,28 @@ public class UserRepository {
     }
 
     public String getHotelWithMostFacilities() {
-        Map.Entry<String, Hotel> entry = hotelDataBase.firstEntry();
+       /* Map.Entry<String, Hotel> entry = hotelDataBase.firstEntry();
         if(entry!=null && entry.getValue().getFacilities().size()!=0)
             return entry.getKey();
         return "";
+        */
+
+        String hotelWithMostFacilities = "";
+        int maxFacilities = 0;
+
+        for (Map.Entry<String, Hotel> entry : hotelDataBase.entrySet()) {
+            Hotel hotel = entry.getValue();
+            int numFacilities = hotel.getFacilities().size();
+
+            if (numFacilities > maxFacilities) {
+                maxFacilities = numFacilities;
+                hotelWithMostFacilities = entry.getKey();
+            } else if (numFacilities == maxFacilities && entry.getKey().compareTo(hotelWithMostFacilities) < 0) {
+                hotelWithMostFacilities = entry.getKey();
+            }
+        }
+
+        return hotelWithMostFacilities;
     }
 
     public int bookARoom(Booking booking) {
