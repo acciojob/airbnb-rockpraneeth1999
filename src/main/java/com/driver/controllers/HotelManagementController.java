@@ -4,7 +4,6 @@ import com.driver.model.Booking;
 import com.driver.model.Facility;
 import com.driver.model.Hotel;
 import com.driver.model.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,8 +11,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/hotel")
 public class HotelManagementController {
-    @Autowired
-    UserService userService;
+
+    UserService userService = new UserService();
 
     @PostMapping("/add-hotel")
     public String addHotel(@RequestBody Hotel hotel){
